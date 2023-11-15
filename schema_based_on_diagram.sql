@@ -10,3 +10,9 @@ admitted_at TIMESTAMP,
 patient_id INT REFERENCES patients(id),
 status VARCHAR(50)
 );
+
+CREATE TABLE treatments(
+id  SERIAL PRIMARY KEY,
+type TIMESTAMP,
+name VARCHAR(50)
+);
