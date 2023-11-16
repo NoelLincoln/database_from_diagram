@@ -13,7 +13,7 @@ status VARCHAR(50)
 
 CREATE TABLE treatments(
 id  SERIAL PRIMARY KEY,
-type TIMESTAMP,
+type VARCHAR(25),
 name VARCHAR(50)
 );
 
@@ -25,7 +25,7 @@ payed_at TIMESTAMP,
 medical_history_id INT UNIQUE REFERENCES medical_histories(id)
 );
 
-CREATE TABLE invoices_items(
+CREATE TABLE invoice_items(
  id SERIAL PRIMARY KEY,
  unit_price DECIMAL(5, 2),
  quantity INT,
@@ -37,5 +37,9 @@ CREATE TABLE invoices_items(
 CREATE TABLE medical_treatment(
     medical_history_id INT REFERENCES medical_histories(id),
     medical_treatment_id INT REFERENCES treatments(id),
-    PRIMARY KEY(medical_history_id, medical_treatment_id)
+    FOREIGN KEY(medical_history_id, medical_treatment_id)
 );
+
+-- Create Index on foreign keys
+CREATE INDEX idx_med_history_id ON medical_histories(id);
+CREATE INDEX idx_med_treat_id ON treatments(id);
